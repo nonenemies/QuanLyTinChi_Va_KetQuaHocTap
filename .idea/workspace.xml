@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bc38b78c-f8e5-4a88-93f1-b71084c6a422" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GiangVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/GiangVien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/MonHoc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/MonHoc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Nganh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Nganh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/SinhVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/SinhVien.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +34,12 @@
     &quot;assignee&quot;: &quot;nonenemies&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/nonenemies/QuanLyTinChi_Va_KetQuaHocTap.git&quot;,
-    &quot;accountId&quot;: &quot;0936aba8-5ae4-40fc-af38-18319d39e854&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nonenemies/QuanLyTinChi_Va_KetQuaHocTap.git",
+    "accountId": "744cc404-50f6-4969-b8a5-e3f2add22ac7"
   }
-}</component>
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -73,8 +78,12 @@
     "RunOnceActivity.git.unshallow": "true",
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "git-widget-placeholder": "Hoang__Anh",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "Van",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Admin/Desktop/QuanLyTinChi_Va_KetQuaHocTap",
+    "last_opened_file_path": "D:/admin/deep_learning/QuanLyTinChi_Va_KetQuaHocTap",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -83,7 +92,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.33813.99" />
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.185" />
       </set>
     </attachedChunks>
   </component>
@@ -96,5 +106,8 @@
       <updated>1794815021099</updated>
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
