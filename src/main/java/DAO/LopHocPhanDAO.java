@@ -1,0 +1,151 @@
+package DAO;
+
+import Model.LopHocPhan;
+import Model.LopHocDangKy;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/** Các truy vấn dữ liệu và thao tác sĩ số cho bảng LopHocPhan. */
+public class LopHocPhanDAO extends BaseDAO {
+
+    /** Lấy các lớp được phân công cho một giảng viên, gồm cả lớp đã kết thúc. */
+    public List<LopHocPhan> layDanhSachLopCuaGiangVien(String maGiangVien) throws SQLException {
+        String sql = "SELECT MaLop, MaMon, MaGiangVien, HocKy, SiSoToiDa, SiSoHienTai, TrangThai "
+                + "FROM LopHocPhan WHERE MaGiangVien = ? ORDER BY HocKy DESC, MaLop";
+        return truyVanDanhSach(sql, maGiangVien);
+    }
+
+    /** Danh sách lớp mở cho sinh viên cùng các lớp sinh viên đã đăng ký. */
+    public List<LopHocDangKy> layDanhSachLopDangKy(String maSinhVien) throws SQLException {
+        return layDanhSachLopDangKy(maSinhVien, false);
+    }
+
+    /** Danh sách đăng ký hiện tại của sinh viên, không phụ thuộc đợt đăng ký còn mở. */
+    public List<LopHocDangKy> layDanhSachLopDaDangKy(String maSinhVien) throws SQLException {
+        return layDanhSachLopDangKy(maSinhVien, true);
+    }
+
+    private List<LopHocDangKy> layDanhSachLopDangKy(String maSinhVien, boolean chiLopDaDangKy)
+            throws SQLException {
+        String sql = "SELECT lh.MaLop, mh.MaMon, mh.TenMon, "
+                + "COALESCE(u.HoTen, lh.MaGiangVien, 'Chưa phân công') AS GiangVien, "
+                + "lh.HocKy, COALESCE(lich.LichHoc, 'Chưa xếp lịch') AS LichHoc, "
+                + "CASE WHEN lich.LichHoc IS NULL THEN 0 ELSE 1 END AS CoLichHoc, "
+                + "mh.SoTinChi, lh.SiSoHienTai, lh.SiSoToiDa, "
+                + "CASE WHEN dk.MaDangKy IS NULL THEN 0 ELSE 1 END AS DaDangKy, "
+                + "dk.TrangThai AS TrangThaiDangKy "
+                + "FROM LopHocPhan lh "
+                + "JOIN MonHoc mh ON mh.MaMon = lh.MaMon "
+                + "LEFT JOIN GiangVien gv ON gv.MaGiangVien = lh.MaGiangVien "
+                + "LEFT JOIN Users u ON u.UserID = gv.UserID "
+                + "LEFT JOIN ("
+                + "SELECT MaLop, GROUP_CONCAT(CONCAT('Thứ ', Thu, ' ', "
+                + "TIME_FORMAT(GioBatDau, '%H:%i'), '-', TIME_FORMAT(GioKetThuc, '%H:%i'), "
+                + "' · ', COALESCE(NULLIF(TRIM(PhongHoc), ''), 'Chưa cập nhật phòng')) "
+                + "ORDER BY Thu, GioBatDau SEPARATOR ' | ') AS LichHoc "
+                + "FROM LichHoc GROUP BY MaLop"
+                + ") lichHoc ON lich.MaLop = lh.MaLop "
+                + "LEFT JOIN DangKyHoc dk ON dk.MaLop = lh.MaLop AND dk.MaSinhVien = ? "
+                + "AND dk.TrangThai <> 'HUY' "
+                + (chiLopDaDangKy
+                ? "WHERE dk.MaDangKy IS NOT NULL "
+                : "WHERE (lh.TrangThai = 'HOAT_DONG' AND mh.TrangThai = 'HOAT_DONG' "
+                + "AND EXISTS (SELECT 1 FROM SinhVien sv "
+                + "JOIN Users u ON u.UserID = sv.UserID "
+                + "JOIN DotDangKyNganh dot ON dot.MaNganh = sv.MaNganh "
+                + "JOIN ChuongTrinhDaoTao ct ON ct.MaNganh = sv.MaNganh AND ct.MaMon = lh.MaMon "
+                + "WHERE sv.MaSinhVien = ? AND CURRENT_TIMESTAMP BETWEEN dot.MoDangKy AND dot.DongDangKy "
+                + ")) OR dk.MaDangKy IS NOT NULL ")
+                + "ORDER BY lh.HocKy DESC, mh.MaMon, lh.MaLop";
+
+        List<LopHocDangKy> danhSach = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, maSinhVien);
+            if (!chiLopDaDangKy) {
+                ps.setString(2, maSinhVien);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    danhSach.add(new LopHocDangKy(
+                            rs.getString("MaLop"), rs.getString("MaMon"),
+                            rs.getString("TenMon"), rs.getString("GiangVien"),
+                            rs.getString("HocKy"), rs.getString("LichHoc"),
+                            rs.getBoolean("CoLichHoc"),
+                            rs.getObject("SoTinChi", Integer.class),
+                            rs.getObject("SiSoHienTai", Integer.class),
+                            rs.getObject("SiSoToiDa", Integer.class),
+                            rs.getBoolean("DaDangKy"),
+                            rs.getString("TrangThaiDangKy"),
+                            null, null));
+                }
+            }
+        }
+        return danhSach;
+    }
+
+    /** Tìm lớp theo mã. */
+    public LopHocPhan layLopTheoMa(String maLop) throws SQLException {
+        String sql = "SELECT MaLop, MaMon, MaGiangVien, HocKy, SiSoToiDa, SiSoHienTai, TrangThai "
+                + "FROM LopHocPhan WHERE MaLop = ?";
+        try (Connection conn = getConnection()) {
+            List<LopHocPhan> ketQua = truyVanDanhSach(conn, sql, maLop);
+            return ketQua.isEmpty() ? null : ketQua.get(0);
+        }
+    }
+
+    /** Tăng sĩ số lớp. */
+    public boolean tangSiSo(String maLop) throws SQLException {
+        String sql = "UPDATE LopHocPhan SET SiSoHienTai = SiSoHienTai + 1 "
+                + "WHERE MaLop = ? AND TrangThai = 'HOAT_DONG' AND SiSoHienTai < SiSoToiDa";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, maLop);
+            return ps.executeUpdate() == 1;
+        }
+    }
+
+    /** Giảm sĩ số lớp. */
+    public boolean giamSiSo(String maLop) throws SQLException {
+        String sql = "UPDATE LopHocPhan SET SiSoHienTai = SiSoHienTai - 1 "
+                + "WHERE MaLop = ? AND SiSoHienTai > 0";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, maLop);
+            return ps.executeUpdate() == 1;
+        }
+    }
+
+    private List<LopHocPhan> truyVanDanhSach(String sql, String thamSoMaMonHoacLop) throws SQLException {
+        try (Connection conn = getConnection()) {
+            return truyVanDanhSach(conn, sql, thamSoMaMonHoacLop);
+        }
+    }
+
+    private List<LopHocPhan> truyVanDanhSach(Connection conn, String sql, String thamSoMaMonHoacLop)
+            throws SQLException {
+        List<LopHocPhan> danhSach = new ArrayList<>();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            if (thamSoMaMonHoacLop != null) {
+                ps.setString(1, thamSoMaMonHoacLop);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    danhSach.add(new LopHocPhan(
+                            rs.getString("MaLop"),
+                            rs.getString("MaMon"),
+                            rs.getString("MaGiangVien"),
+                            rs.getString("HocKy"),
+                            rs.getObject("SiSoToiDa", Integer.class),
+                            rs.getObject("SiSoHienTai", Integer.class),
+                            rs.getString("TrangThai")
+                    ));
+                }
+            }
+        }
+        return danhSach;
+    }
+}
