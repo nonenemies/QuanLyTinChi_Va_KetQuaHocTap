@@ -12,11 +12,11 @@ public class SinhVien extends Users {
     private String heDaoTao;
 
     public SinhVien(Integer userID, String hoTen, String email,
-                    String passwordHash, String role, String maSo,
+                    String password, String vaiTro, String maSo,
                     Nganh nganh, Date ngayTao, String trangThai,
                     String maSinhVien, Date ngaySinh, Boolean gioiTinh,
                     String lop, Integer khoaHoc, String heDaoTao) {
-        super(userID, hoTen, email, passwordHash, role, maSo, ngayTao, trangThai);
+        super(userID, hoTen, email, password, vaiTro, maSo, ngayTao, trangThai);
         this.maSinhVien = maSinhVien;
         this.nganh = nganh;
         this.ngaySinh = ngaySinh;
