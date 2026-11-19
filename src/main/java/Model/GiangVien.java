@@ -8,10 +8,10 @@ public class GiangVien extends Users {
     private String hocVi;
 
     public GiangVien(Integer userID, String hoTen, String email,
-                     String passwordHash, String role, String maSo,
+                     String password, String vaiTro, String maSo,
                      Date ngayTao, String trangThai,
                      String maGiangVien, String chuyenNganh, String hocVi) {
-        super(userID, hoTen, email, passwordHash, role, maSo, ngayTao, trangThai);
+        super(userID, hoTen, email, password, vaiTro, maSo, ngayTao, trangThai);
         this.maGiangVien = maGiangVien;
         this.chuyenNganh = chuyenNganh;
         this.hocVi = hocVi;

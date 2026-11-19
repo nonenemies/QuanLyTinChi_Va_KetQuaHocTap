@@ -6,9 +6,9 @@ public class Admin extends Users {
         private String chucVu;
 
         public Admin(Integer userID, String hoTen, String email,
-                     String passwordHash, String role, String maSo,
+                     String password, String vaiTro, String maSo,
                      Date ngayTao, String trangThai, String chucVu) {
-                super(userID, hoTen, email, passwordHash, role, maSo, ngayTao, trangThai);
+                super(userID, hoTen, email, password, vaiTro, maSo, ngayTao, trangThai);
                 this.chucVu = chucVu;
         }
 
