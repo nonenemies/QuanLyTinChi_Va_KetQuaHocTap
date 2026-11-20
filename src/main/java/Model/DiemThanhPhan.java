@@ -3,28 +3,28 @@ package Model;
 import java.util.Date;
 
 public class DiemThanhPhan {
-    private int maDiemTP;
+    private int maDiemThanhPhan;
     private int maDangKy;
-    private int maTP;
+    private int maThanhPhan;
     private float diemDatDuoc;
     private Date ngayNhap;
 
     public DiemThanhPhan() {
     }
 
-    public DiemThanhPhan(int maDiemTP, int maDangKy, int maTP, float diemDatDuoc) {
-        this.maDiemTP = maDiemTP;
+    public DiemThanhPhan(int maDiemThanhPhan, int maDangKy, int maThanhPhan, float diemDatDuoc) {
+        this.maDiemThanhPhan = maDiemThanhPhan;
         this.maDangKy = maDangKy;
-        this.maTP = maTP;
+        this.maThanhPhan = maThanhPhan;
         this.diemDatDuoc = diemDatDuoc;
     }
 
-    public int getMaDiemTP() {
-        return maDiemTP;
+    public int getMaDiemThanhPhan() {
+        return maDiemThanhPhan;
     }
 
-    public void setMaDiemTP(int maDiemTP) {
-        this.maDiemTP = maDiemTP;
+    public void setMaDiemThanhPhan(int maDiemThanhPhan) {
+        this.maDiemThanhPhan = maDiemThanhPhan;
     }
 
     public int getMaDangKy() {
@@ -35,12 +35,12 @@ public class DiemThanhPhan {
         this.maDangKy = maDangKy;
     }
 
-    public int getMaTP() {
-        return maTP;
+    public int getMaThanhPhan() {
+        return maThanhPhan;
     }
 
-    public void setMaTP(int maTP) {
-        this.maTP = maTP;
+    public void setMaThanhPhan(int maThanhPhan) {
+        this.maThanhPhan = maThanhPhan;
     }
 
     public float getDiemDatDuoc() {

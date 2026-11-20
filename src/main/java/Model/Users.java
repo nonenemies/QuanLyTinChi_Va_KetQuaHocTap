@@ -6,19 +6,19 @@ public abstract class Users {
     protected Integer userID;
     protected String hoTen;
     protected String email;
-    protected String passwordHash;
-    protected String role;
+    protected String password;
+    protected String vaiTro;
     protected String maSo;
     protected Date ngayTao;
     protected String trangThai;
 
-    public Users(Integer userID, String hoTen, String email, String passwordHash,
-                 String role, String maSo, Date ngayTao, String trangThai) {
+    public Users(Integer userID, String hoTen, String email, String password,
+                 String vaiTro, String maSo, Date ngayTao, String trangThai) {
         this.userID = userID;
         this.hoTen = hoTen;
         this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = role;
+        this.password = password;
+        this.vaiTro = vaiTro;
         this.maSo = maSo;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
@@ -48,20 +48,20 @@ public abstract class Users {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getVaiTro() {
+        return vaiTro;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setVaiTro(String vaiTro) {
+        this.vaiTro = vaiTro;
     }
 
     public String getMaSo() {
