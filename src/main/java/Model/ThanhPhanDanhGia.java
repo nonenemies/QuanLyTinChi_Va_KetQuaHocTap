@@ -1,9 +1,9 @@
 package Model;
 
 public class ThanhPhanDanhGia {
-    private int maTP;
+    private int maThanhPhan;
     private String maMon;
-    private String tenTP;
+    private String tenThanhPhan;
     private float trongSo;
     private int thuTu;
     private boolean trangThai = true;
@@ -11,22 +11,22 @@ public class ThanhPhanDanhGia {
     public ThanhPhanDanhGia() {
     }
 
-    public ThanhPhanDanhGia(int maTP, String maMon, String tenTP, float trongSo,
+    public ThanhPhanDanhGia(int maThanhPhan, String maMon, String tenThanhPhan, float trongSo,
                            int thuTu, boolean trangThai) {
-        this.maTP = maTP;
+        this.maThanhPhan = maThanhPhan;
         this.maMon = maMon;
-        this.tenTP = tenTP;
+        this.tenThanhPhan = tenThanhPhan;
         this.trongSo = trongSo;
         this.thuTu = thuTu;
         this.trangThai = trangThai;
     }
 
-    public int getMaTP() {
-        return maTP;
+    public int getMaThanhPhan() {
+        return maThanhPhan;
     }
 
-    public void setMaTP(int maTP) {
-        this.maTP = maTP;
+    public void setMaThanhPhan(int maThanhPhan) {
+        this.maThanhPhan = maThanhPhan;
     }
 
     public String getMaMon() {
@@ -37,12 +37,12 @@ public class ThanhPhanDanhGia {
         this.maMon = maMon;
     }
 
-    public String getTenTP() {
-        return tenTP;
+    public String getTenThanhPhan() {
+        return tenThanhPhan;
     }
 
-    public void setTenTP(String tenTP) {
-        this.tenTP = tenTP;
+    public void setTenThanhPhan(String tenThanhPhan) {
+        this.tenThanhPhan = tenThanhPhan;
     }
 
     public float getTrongSo() {
