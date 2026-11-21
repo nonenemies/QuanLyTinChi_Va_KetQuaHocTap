@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.MonHoc;
+import Util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

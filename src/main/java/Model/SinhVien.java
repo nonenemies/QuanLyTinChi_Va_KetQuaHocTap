@@ -6,7 +6,7 @@ public class SinhVien extends Users {
     private String maSinhVien;
     private Nganh nganh;
     private Date ngaySinh;
-    private Boolean gioiTinh;
+    private String gioiTinh;
     private String lop;
     private Integer khoaHoc;
     private String heDaoTao;
@@ -14,7 +14,7 @@ public class SinhVien extends Users {
     public SinhVien(Integer userID, String hoTen, String email,
                     String password, String vaiTro, String maSo,
                     Nganh nganh, Date ngayTao, String trangThai,
-                    String maSinhVien, Date ngaySinh, Boolean gioiTinh,
+                    String maSinhVien, Date ngaySinh, String gioiTinh,
                     String lop, Integer khoaHoc, String heDaoTao) {
         super(userID, hoTen, email, password, vaiTro, maSo, ngayTao, trangThai);
         this.maSinhVien = maSinhVien;
@@ -50,11 +50,11 @@ public class SinhVien extends Users {
         this.ngaySinh = ngaySinh;
     }
 
-    public Boolean getGioiTinh() {
+    public String getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(Boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 

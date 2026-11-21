@@ -19,6 +19,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.util.StringConverter;
 
 import java.text.DecimalFormat;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,8 @@ public class GiangVienController {
             @Override
             public String toString(ThanhPhanDanhGia thanhPhan) {
                 if (thanhPhan == null) return "";
-                return thanhPhan.getTenThanhPhan() + " (" + dinhDangDiem.format(thanhPhan.getTrongSo() * 100) + "%)";
+                return thanhPhan.getTenThanhPhan() + " (" + dinhDangDiem.format(
+                        thanhPhan.getTrongSo().multiply(java.math.BigDecimal.valueOf(100))) + "%)";
             }
 
             @Override
@@ -107,14 +109,15 @@ public class GiangVienController {
             return;
         }
 
-        float diem;
+        BigDecimal diem;
         try {
-            diem = Float.parseFloat(txtDiem.getText().trim().replace(',', '.'));
+            diem = new BigDecimal(txtDiem.getText().trim().replace(',', '.')).stripTrailingZeros();
         } catch (NumberFormatException loiPhatSinh) {
             hienThiTrangThai("Điểm phải là số từ 0 đến 10.", true);
             return;
         }
-        if (!Float.isFinite(diem) || diem < 0 || diem > 10) {
+        if (diem.compareTo(BigDecimal.ZERO) < 0 || diem.compareTo(BigDecimal.TEN) > 0
+                || diem.scale() > 2) {
             hienThiTrangThai("Điểm phải nằm trong khoảng từ 0 đến 10.", true);
             return;
         }
@@ -167,7 +170,8 @@ public class GiangVienController {
         try {
             List<ThanhPhanDanhGia> cacThanhPhan = daoThanhPhanDanhGia.layTheoMon(lopHoc.getMaMon())
                     .stream().filter(ThanhPhanDanhGia::getTrangThai)
-                    .sorted((thanhPhanDau, thanhPhanSau) -> Integer.compare(thanhPhanDau.getThuTu(), thanhPhanSau.getThuTu()))
+                    .sorted(java.util.Comparator.comparing(ThanhPhanDanhGia::getThuTu,
+                            java.util.Comparator.nullsLast(Integer::compareTo)))
                     .toList();
             cmbThanhPhanDanhGia.setItems(FXCollections.observableArrayList(cacThanhPhan));
             if (thanhPhanDaChonTruoc != null) {

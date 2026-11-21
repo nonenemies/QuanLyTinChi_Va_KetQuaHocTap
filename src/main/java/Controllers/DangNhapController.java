@@ -38,7 +38,8 @@ public class DangNhapController {
         try {
             nguoiDung = dichVuXacThuc.xacThucDangNhap(diaChiEmail, matKhau);
         } catch (ServiceException loiPhatSinh) {
-            lblLoi.setText("Không thể đăng nhập do lỗi hệ thống. Vui lòng thử lại sau.");
+            loiPhatSinh.printStackTrace();
+            lblLoi.setText("Không kết nối được cơ sở dữ liệu. Kiểm tra MySQL đang chạy và cấu hình DB_URL, DB_USER, DB_PASSWORD.");
             lblLoi.setVisible(true);
             lblLoi.setManaged(true);
             return;

@@ -1,18 +1,20 @@
 package Model;
 
+import java.math.BigDecimal;
+
 public class ThanhPhanDanhGia {
     private int maThanhPhan;
     private String maMon;
     private String tenThanhPhan;
-    private float trongSo;
-    private int thuTu;
+    private BigDecimal trongSo;
+    private Integer thuTu;
     private boolean trangThai = true;
 
     public ThanhPhanDanhGia() {
     }
 
-    public ThanhPhanDanhGia(int maThanhPhan, String maMon, String tenThanhPhan, float trongSo,
-                           int thuTu, boolean trangThai) {
+    public ThanhPhanDanhGia(int maThanhPhan, String maMon, String tenThanhPhan, BigDecimal trongSo,
+                           Integer thuTu, boolean trangThai) {
         this.maThanhPhan = maThanhPhan;
         this.maMon = maMon;
         this.tenThanhPhan = tenThanhPhan;
@@ -45,19 +47,19 @@ public class ThanhPhanDanhGia {
         this.tenThanhPhan = tenThanhPhan;
     }
 
-    public float getTrongSo() {
+    public BigDecimal getTrongSo() {
         return trongSo;
     }
 
-    public void setTrongSo(float trongSo) {
+    public void setTrongSo(BigDecimal trongSo) {
         this.trongSo = trongSo;
     }
 
-    public int getThuTu() {
+    public Integer getThuTu() {
         return thuTu;
     }
 
-    public void setThuTu(int thuTu) {
+    public void setThuTu(Integer thuTu) {
         this.thuTu = thuTu;
     }
 

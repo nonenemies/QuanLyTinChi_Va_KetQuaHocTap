@@ -49,7 +49,7 @@ public class LopHocPhanDAO extends BaseDAO {
                 + "' · ', COALESCE(NULLIF(TRIM(PhongHoc), ''), 'Chưa cập nhật phòng')) "
                 + "ORDER BY Thu, GioBatDau SEPARATOR ' | ') AS LichHoc "
                 + "FROM LichHoc GROUP BY MaLop"
-                + ") lichHoc ON lich.MaLop = lh.MaLop "
+                + ") lich ON lich.MaLop = lh.MaLop "
                 + "LEFT JOIN DangKyHoc dk ON dk.MaLop = lh.MaLop AND dk.MaSinhVien = ? "
                 + "AND dk.TrangThai <> 'HUY' "
                 + (chiLopDaDangKy

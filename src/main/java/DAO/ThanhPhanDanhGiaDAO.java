@@ -20,8 +20,8 @@ public class ThanhPhanDanhGiaDAO extends BaseDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     ketQua.add(new ThanhPhanDanhGia(rs.getInt("MaThanhPhan"), rs.getString("MaMon"),
-                            rs.getString("TenThanhPhan"), rs.getFloat("TrongSo"),
-                            rs.getInt("ThuTu"), rs.getBoolean("TrangThai")));
+                            rs.getString("TenThanhPhan"), rs.getBigDecimal("TrongSo"),
+                            rs.getObject("ThuTu", Integer.class), rs.getBoolean("TrangThai")));
                 }
             }
         }

@@ -1,18 +1,19 @@
 package Model;
 
 import java.util.Date;
+import java.math.BigDecimal;
 
 public class DiemThanhPhan {
     private int maDiemThanhPhan;
     private int maDangKy;
     private int maThanhPhan;
-    private float diemDatDuoc;
+    private BigDecimal diemDatDuoc;
     private Date ngayNhap;
 
     public DiemThanhPhan() {
     }
 
-    public DiemThanhPhan(int maDiemThanhPhan, int maDangKy, int maThanhPhan, float diemDatDuoc) {
+    public DiemThanhPhan(int maDiemThanhPhan, int maDangKy, int maThanhPhan, BigDecimal diemDatDuoc) {
         this.maDiemThanhPhan = maDiemThanhPhan;
         this.maDangKy = maDangKy;
         this.maThanhPhan = maThanhPhan;
@@ -43,11 +44,11 @@ public class DiemThanhPhan {
         this.maThanhPhan = maThanhPhan;
     }
 
-    public float getDiemDatDuoc() {
+    public BigDecimal getDiemDatDuoc() {
         return diemDatDuoc;
     }
 
-    public void setDiemDatDuoc(float diemDatDuoc) {
+    public void setDiemDatDuoc(BigDecimal diemDatDuoc) {
         this.diemDatDuoc = diemDatDuoc;
     }
 

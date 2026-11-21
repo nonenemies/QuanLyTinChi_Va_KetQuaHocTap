@@ -117,7 +117,7 @@ public class DiemDAO extends BaseDAO {
 
     /** Thêm hoặc cập nhật điểm theo mã thành phần. */
     public boolean nhapDiem(String maSinhVien, String maLop,
-                            int maThanhPhan, float diemDatDuoc) throws SQLException {
+                            int maThanhPhan, java.math.BigDecimal diemDatDuoc) throws SQLException {
         try (Connection conn = getConnection()) {
         int maDangKy;
         String registrationSql = "SELECT MaDangKy FROM DangKyHoc "
@@ -174,7 +174,7 @@ public class DiemDAO extends BaseDAO {
                             "INSERT INTO DiemThanhPhan (MaDangKy, MaThanhPhan, DiemDatDuoc) VALUES (?, ?, ?)")) {
                         insert.setInt(1, maDangKy);
                         insert.setInt(2, maThanhPhan);
-                        insert.setFloat(3, diemDatDuoc);
+                        insert.setBigDecimal(3, diemDatDuoc);
                         return insert.executeUpdate() == 1;
                     }
                 }
@@ -187,7 +187,7 @@ public class DiemDAO extends BaseDAO {
         try (PreparedStatement update = conn.prepareStatement(
                 "UPDATE DiemThanhPhan SET DiemDatDuoc = ?, NgayNhap = CURRENT_TIMESTAMP "
                         + "WHERE MaDiemThanhPhan = ?")) {
-            update.setFloat(1, diemDatDuoc);
+            update.setBigDecimal(1, diemDatDuoc);
             update.setInt(2, maDiemThanhPhan);
             return update.executeUpdate() == 1;
         }

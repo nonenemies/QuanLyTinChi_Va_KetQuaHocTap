@@ -112,8 +112,7 @@ public class UsersDAO extends BaseDAO {
         String maSo = rs.getString("MaSo");
         java.util.Date ngayTao = rs.getTimestamp("NgayTao");
         String trangThai = rs.getString("TrangThai");
-        boolean gioiTinhValue = rs.getBoolean("GioiTinh");
-        Boolean gioiTinh = rs.wasNull() ? null : gioiTinhValue;
+        String gioiTinh = rs.getString("GioiTinh");
         return switch (vaiTro.toUpperCase(java.util.Locale.ROOT)) {
             case "SINHVIEN" -> new SinhVien(userID, hoTen, email, password, vaiTro, maSo,
                     docNganh(rs), ngayTao,

@@ -1,7 +1,8 @@
 package DAO;
 
-import Model.Nganh;
 import Model.SinhVien;
+import Model.Nganh;
+import Util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -59,8 +60,7 @@ public class SinhVienDAO extends BaseDAO {
             ps.setString(3, sinhVien.getNganh() == null ? null : sinhVien.getNganh().getMaNganh());
             if (sinhVien.getNgaySinh() == null) ps.setDate(4, null);
             else ps.setDate(4, new java.sql.Date(sinhVien.getNgaySinh().getTime()));
-            if (sinhVien.getGioiTinh() == null) ps.setObject(5, null);
-            else ps.setBoolean(5, sinhVien.getGioiTinh());
+            ps.setString(5, sinhVien.getGioiTinh());
             ps.setString(6, sinhVien.getLop());
             ps.setObject(7, sinhVien.getKhoaHoc());
             ps.setString(8, sinhVien.getHeDaoTao());
@@ -77,8 +77,7 @@ public class SinhVienDAO extends BaseDAO {
             ps.setString(2, sinhVien.getNganh() == null ? null : sinhVien.getNganh().getMaNganh());
             if (sinhVien.getNgaySinh() == null) ps.setDate(3, null);
             else ps.setDate(3, new java.sql.Date(sinhVien.getNgaySinh().getTime()));
-            if (sinhVien.getGioiTinh() == null) ps.setObject(4, null);
-            else ps.setBoolean(4, sinhVien.getGioiTinh());
+            ps.setString(4, sinhVien.getGioiTinh());
             ps.setString(5, sinhVien.getLop());
             ps.setObject(6, sinhVien.getKhoaHoc());
             ps.setString(7, sinhVien.getHeDaoTao());
@@ -96,7 +95,7 @@ public class SinhVienDAO extends BaseDAO {
     }
 
     private SinhVien docSinhVien(ResultSet rs) throws SQLException {
-        Boolean gioiTinh = rs.getObject("GioiTinh", Boolean.class);
+        String gioiTinh = rs.getString("GioiTinh");
         return new SinhVien(rs.getInt("UserID"), rs.getString("HoTen"), rs.getString("Email"),
                 rs.getString("Password"), rs.getString("VaiTro"), rs.getString("MaSo"),
                 docNganh(rs), rs.getTimestamp("NgayTao"),
