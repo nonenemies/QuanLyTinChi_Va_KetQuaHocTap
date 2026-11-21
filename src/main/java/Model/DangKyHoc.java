@@ -1,5 +1,6 @@
 package Model;
 import java.util.*;
+import java.math.BigDecimal;
 
 public class DangKyHoc {
 
@@ -7,7 +8,7 @@ public class DangKyHoc {
     private String maLop;
     private String maSinhVien;
     private Date ngayDangKy;
-    private float diemTongKet;
+    private BigDecimal diemTongKet;
     private String trangThai;
 
     public DangKyHoc() {
@@ -18,7 +19,7 @@ public class DangKyHoc {
         this.maSinhVien = maSinhVien;
     }
 
-    public DangKyHoc(int maDangKy, String maLop, String maSinhVien, Date ngayDangKy, float diemTongKet, String trangThai) {
+    public DangKyHoc(int maDangKy, String maLop, String maSinhVien, Date ngayDangKy, BigDecimal diemTongKet, String trangThai) {
         this.maDangKy = maDangKy;
         this.maLop = maLop;
         this.maSinhVien = maSinhVien;
@@ -59,11 +60,11 @@ public class DangKyHoc {
         this.ngayDangKy = ngayDangKy;
     }
 
-    public float getDiemTongKet() {
+    public BigDecimal getDiemTongKet() {
         return diemTongKet;
     }
 
-    public void setDiemTongKet(float diemTongKet) {
+    public void setDiemTongKet(BigDecimal diemTongKet) {
         this.diemTongKet = diemTongKet;
     }
 

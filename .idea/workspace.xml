@@ -6,14 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="bc38b78c-f8e5-4a88-93f1-b71084c6a422" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DangNhapController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/GiangVienController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ThanhDieuHuongController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/DiemThanhPhan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/DiemThanhPhan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/ThanhPhanDanhGia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ThanhPhanDanhGia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/src/main/resources/view/DangNhapView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/src/main/resources/view/DashBoardView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/src/main/resources/view/GiangVienView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/src/main/resources/view/ThanhDieuHuongView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DangNhapView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DashBoardView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/GiangVienView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ThanhDieuHuongView.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

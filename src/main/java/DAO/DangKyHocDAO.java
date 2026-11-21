@@ -206,7 +206,7 @@ public class DangKyHocDAO extends BaseDAO {
                             rs.getString("MaMon"),
                             rs.getString("TenMon"),
                             rs.getString("HocKy"),
-                            rs.getInt("Thu"),
+                            rs.getString("Thu"),
                             rs.getString("GioBatDau"),
                             rs.getString("GioKetThuc"),
                             rs.getString("PhongHoc")));

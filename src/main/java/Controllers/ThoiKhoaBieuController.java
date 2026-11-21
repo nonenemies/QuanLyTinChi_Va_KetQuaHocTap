@@ -18,6 +18,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ThoiKhoaBieuController {
     private static final String[] TEN_NGAY = {
@@ -78,10 +79,11 @@ public class ThoiKhoaBieuController {
             }
 
             for (LopHocThoiKhoaBieu buoiHoc : cacBuoiHoc) {
-                if (buoiHoc.getThu() < 2 || buoiHoc.getThu() > 8) {
+                int cotNgay = layCotNgay(buoiHoc.getThu());
+                if (cotNgay < 1) {
                     continue;
                 }
-                themTietVaoThoiKhoaBieu(buoiHoc);
+                themTietVaoThoiKhoaBieu(buoiHoc, cotNgay);
             }
             hienThiTrangThai("Thời khóa biểu gồm " + cacBuoiHoc.size()
                     + " buổi học. Mỗi môn nằm theo đúng khung giờ thực tế.", false);
@@ -90,7 +92,21 @@ public class ThoiKhoaBieuController {
         }
     }
 
-    private void themTietVaoThoiKhoaBieu(LopHocThoiKhoaBieu buoiHoc) {
+    private int layCotNgay(String thu) {
+        if (thu == null) return -1;
+        return switch (thu.trim().toLowerCase(Locale.ROOT)) {
+            case "thứ 2" -> 1;
+            case "thứ 3" -> 2;
+            case "thứ 4" -> 3;
+            case "thứ 5" -> 4;
+            case "thứ 6" -> 5;
+            case "thứ 7" -> 6;
+            case "chủ nhật" -> 7;
+            default -> -1;
+        };
+    }
+
+    private void themTietVaoThoiKhoaBieu(LopHocThoiKhoaBieu buoiHoc, int cotNgay) {
         LocalTime gioBatDau;
         LocalTime gioKetThuc;
         try {
@@ -125,7 +141,7 @@ public class ThoiKhoaBieuController {
         GridPane.setHgrow(theHocPhan, Priority.ALWAYS);
         GridPane.setVgrow(theHocPhan, Priority.ALWAYS);
         GridPane.setMargin(theHocPhan, new Insets(3));
-        luoiThoiKhoaBieu.add(theHocPhan, buoiHoc.getThu() - 1, chiSoCa + 1, 1, soHang);
+        luoiThoiKhoaBieu.add(theHocPhan, cotNgay, chiSoCa + 1, 1, soHang);
         cacTheTietHoc.add(theHocPhan);
     }
 
