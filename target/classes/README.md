@@ -1,1 +1,0 @@
-# QuanLyTinChi_Va_KetQuaHocTap
