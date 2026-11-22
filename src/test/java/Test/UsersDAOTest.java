@@ -3,23 +3,23 @@ package Test;
 import DAO.UsersDAO;
 import Model.Users;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
-public class UsersDAOTest extends DatabaseTestBase {
+public class UsersDAOTest extends LopCoSoKiemThu {
     @Test public void emailTonTaiTaiKhoanDangHoatDong() throws Exception {
-        Users user = new UsersDAO().layTheoEmailDangHoatDong(db.studentEmail);
-        assertNotNull(user);
-        assertEquals(db.studentCode, user.getMaSo());
-        assertEquals("HOAT_DONG", user.getTrangThai());
+        Users taiKhoan = new UsersDAO().layTheoEmailDangHoatDong(duLieu.emailSinhVien);
+        assertNotNull(taiKhoan);
+        assertEquals(duLieu.maSinhVien, taiKhoan.getMaSo());
+        assertEquals("HOAT_DONG", taiKhoan.getTrangThai());
     }
 
     @Test public void emailKhongTonTai() throws Exception {
-        assertNull(new UsersDAO().layTheoEmailDangHoatDong(db.tag + "-missing@test.local"));
+        assertNull(new UsersDAO().layTheoEmailDangHoatDong(duLieu.tienTo + "-khongtontai@test.local"));
     }
 
     @Test public void emailTonTaiNhungTaiKhoanDaNgung() throws Exception {
-        db.setUserStatus(db.studentEmail, "NGUNG_HOAT_DONG");
-        assertNull(new UsersDAO().layTheoEmailDangHoatDong(db.studentEmail));
+        duLieu.capNhatTrangThaiNguoiDung(duLieu.emailSinhVien, "NGUNG_HOAT_DONG");
+        assertNull(new UsersDAO().layTheoEmailDangHoatDong(duLieu.emailSinhVien));
     }
+
 }

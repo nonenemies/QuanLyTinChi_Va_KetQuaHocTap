@@ -53,7 +53,6 @@ public class AdminController {
     @FXML private TableColumn<Users, String> cotNganhNguoiDung;
     @FXML private TableColumn<Users, String> cotTrangThaiNguoiDung;
     @FXML private TextField txtTimTaiKhoan;
-    @FXML private ComboBox<String> cmbVaiTroTaiKhoan;
     @FXML private TextField txtMaTaiKhoan;
     @FXML private TextField txtTenNguoiDung;
     @FXML private TextField txtEmailNguoiDung;
@@ -84,6 +83,7 @@ public class AdminController {
     @FXML private TextArea txtMoTaMonHoc;
 
     private Admin quanTriVien;
+    private String vaiTroTaiKhoan;
     private Users taiKhoanDangChon;
     private MonHoc monHocDangChon;
 
@@ -91,8 +91,6 @@ public class AdminController {
     private void initialize() {
         cauHinhBangTaiKhoan();
         cauHinhBangMonHoc();
-        cmbVaiTroTaiKhoan.setItems(FXCollections.observableArrayList(VAI_TRO_SINH_VIEN, VAI_TRO_GIANG_VIEN));
-        cmbVaiTroTaiKhoan.getSelectionModel().selectFirst();
         cmbTrangThaiNguoiDung.setItems(FXCollections.observableArrayList("HOAT_DONG", "NGUNG_HOAT_DONG"));
         cmbTrangThaiNguoiDung.getSelectionModel().select("HOAT_DONG");
         cmbGioiTinhSinhVien.setItems(FXCollections.observableArrayList("Không chỉ định", "Nam", "Nữ"));
@@ -101,15 +99,11 @@ public class AdminController {
         bangMonHoc.setItems(monHocDaLoc);
         txtTimTaiKhoan.textProperty().addListener((thuocTinh, giaTriCu, giaTriMoi) -> locTaiKhoan());
         txtTimMonHoc.textProperty().addListener((thuocTinh, giaTriCu, giaTriMoi) -> locMonHoc());
-        cmbVaiTroTaiKhoan.valueProperty().addListener((thuocTinh, giaTriCu, vaiTro) -> {
-            capNhatTruongTheoVaiTro(vaiTro);
-            locTaiKhoan();
-        });
         bangTaiKhoan.getSelectionModel().selectedItemProperty().addListener(
                 (thuocTinh, giaTriCu, duocChon) -> dienBieuMauTaiKhoan(duocChon));
         bangMonHoc.getSelectionModel().selectedItemProperty().addListener(
                 (thuocTinh, giaTriCu, duocChon) -> dienBieuMauMonHoc(duocChon));
-        capNhatTruongTheoVaiTro(cmbVaiTroTaiKhoan.getValue());
+        capNhatTruongTheoVaiTro(vaiTroTaiKhoan);
     }
 
     public void ganQuanTriVien(Users nguoiDung, String mucQuanLy) {
@@ -125,7 +119,9 @@ public class AdminController {
         khungQuanLyMonHoc.setVisible(dangQuanLyMonHoc);
         khungQuanLyMonHoc.setManaged(dangQuanLyMonHoc);
         if (!dangQuanLyMonHoc) {
-            cmbVaiTroTaiKhoan.setValue("admin-lecturers".equals(mucQuanLy) ? VAI_TRO_GIANG_VIEN : VAI_TRO_SINH_VIEN);
+            vaiTroTaiKhoan = "admin-lecturers".equals(mucQuanLy)
+                    ? VAI_TRO_GIANG_VIEN : VAI_TRO_SINH_VIEN;
+            capNhatTruongTheoVaiTro(vaiTroTaiKhoan);
         }
         taiToanBoDuLieu();
     }
@@ -155,7 +151,6 @@ public class AdminController {
         cmbGioiTinhSinhVien.getSelectionModel().selectFirst();
         txtChuyenNganhGiangVien.clear();
         txtHocViGiangVien.clear();
-        cmbVaiTroTaiKhoan.setDisable(false);
         cmbTrangThaiNguoiDung.getSelectionModel().select("HOAT_DONG");
     }
 
@@ -313,8 +308,8 @@ public class AdminController {
 
     private void locTaiKhoan() {
         String tuKhoa = chuanHoa(txtTimTaiKhoan.getText());
-        String vaiTro = cmbVaiTroTaiKhoan.getValue();
-        taiKhoanDaLoc.setPredicate(taiKhoan -> (vaiTro == null || vaiTro.equalsIgnoreCase(taiKhoan.getVaiTro()))
+        taiKhoanDaLoc.setPredicate(taiKhoan -> (vaiTroTaiKhoan == null
+                || vaiTroTaiKhoan.equalsIgnoreCase(taiKhoan.getVaiTro()))
                 && (taiKhoan.getMaSo() + " " + taiKhoan.getHoTen() + " "
                 + taiKhoan.getEmail() + " " + taiKhoan.getVaiTro() + " " + nganhTaiKhoan(taiKhoan))
                 .toLowerCase(Locale.ROOT).contains(tuKhoa));
@@ -334,8 +329,7 @@ public class AdminController {
     private void dienBieuMauTaiKhoan(Users duocChon) {
         taiKhoanDangChon = duocChon;
         if (duocChon == null) return;
-        cmbVaiTroTaiKhoan.setValue(duocChon instanceof SinhVien ? VAI_TRO_SINH_VIEN : VAI_TRO_GIANG_VIEN);
-        cmbVaiTroTaiKhoan.setDisable(true);
+        vaiTroTaiKhoan = duocChon instanceof SinhVien ? VAI_TRO_SINH_VIEN : VAI_TRO_GIANG_VIEN;
         txtMaTaiKhoan.setText(duocChon.getMaSo());
         txtMaTaiKhoan.setDisable(true);
         txtTenNguoiDung.setText(duocChon.getHoTen());
@@ -357,11 +351,11 @@ public class AdminController {
             txtChuyenNganhGiangVien.setText(giangVien.getChuyenNganh());
             txtHocViGiangVien.setText(giangVien.getHocVi());
         }
-        capNhatTruongTheoVaiTro(cmbVaiTroTaiKhoan.getValue());
+        capNhatTruongTheoVaiTro(vaiTroTaiKhoan);
     }
 
     private Users taoTaiKhoanTuBieuMau() {
-        String vaiTro = cmbVaiTroTaiKhoan.getValue();
+        String vaiTro = vaiTroTaiKhoan;
         String maSo = batBuoc(txtMaTaiKhoan.getText(), "Mã tài khoản");
         String hoTen = batBuoc(txtTenNguoiDung.getText(), "Họ tên");
         String diaChiEmail = batBuoc(txtEmailNguoiDung.getText(), "Email");

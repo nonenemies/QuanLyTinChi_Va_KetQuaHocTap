@@ -3,25 +3,25 @@ package Test;
 import Model.Users;
 import Services.AuthService;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
-public class AuthServiceTest extends DatabaseTestBase {
-    private final AuthService service = new AuthService();
+public class AuthServiceTest extends LopCoSoKiemThu {
+    private final AuthService dichVu = new AuthService();
 
-    @Test public void dangNhapDungEmailVaMatKhauTaiKhoanHoatDong() {
-        Users user = service.xacThucDangNhap(db.studentEmail, "secret");
-        assertNotNull(user);
-        assertEquals(db.studentCode, user.getMaSo());
+    @Test public void xacThucDangNhapKhiEmailVaMatKhauDung() {
+        Users taiKhoan = dichVu.xacThucDangNhap(duLieu.emailSinhVien, "matkhau-thu");
+        assertNotNull(taiKhoan);
+        assertEquals(duLieu.maSinhVien, taiKhoan.getMaSo());
     }
 
-    @Test public void dangNhapSaiMatKhau() {
-        assertNull(service.xacThucDangNhap(db.studentEmail, "sai"));
+    @Test public void tuChoiDangNhapKhiSaiMatKhau() {
+        assertNull(dichVu.xacThucDangNhap(duLieu.emailSinhVien, "sai"));
     }
 
-    @Test public void dangNhapEmailKhongTonTaiHoacTaiKhoanNgung() throws Exception {
-        assertNull(service.xacThucDangNhap(db.tag + "-missing@test.local", "secret"));
-        db.setUserStatus(db.studentEmail, "NGUNG_HOAT_DONG");
-        assertNull(service.xacThucDangNhap(db.studentEmail, "secret"));
+    @Test public void tuChoiDangNhapKhiEmailKhongTonTaiHoacTaiKhoanNgung() throws Exception {
+        assertNull(dichVu.xacThucDangNhap(duLieu.tienTo + "-khongtontai@test.local", "matkhau-thu"));
+        duLieu.capNhatTrangThaiNguoiDung(duLieu.emailSinhVien, "NGUNG_HOAT_DONG");
+        assertNull(dichVu.xacThucDangNhap(duLieu.emailSinhVien, "matkhau-thu"));
     }
+
 }
