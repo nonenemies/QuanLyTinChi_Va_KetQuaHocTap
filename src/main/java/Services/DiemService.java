@@ -9,6 +9,7 @@ import Model.LopHocPhan;
 import Model.SinhVien;
 import Model.ThanhPhanDanhGia;
 import java.sql.SQLException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -101,11 +102,12 @@ public class DiemService {
      * Kết quả nghiệp vụ không hợp lệ được trả về false; lỗi cơ sở dữ liệu được ném lên caller.
      */
     public boolean nhapDiemVaTinhTongKet(GiangVien giangVien, String maSinhVien, String maLop,
-                                        ThanhPhanDanhGia thanhPhan, float diemDatDuoc) {
+                                         ThanhPhanDanhGia thanhPhan, BigDecimal diemDatDuoc) {
         kiemTraGiangVien(giangVien);
         if (maSinhVien == null || maSinhVien.isBlank() || maLop == null || maLop.isBlank()
                 || thanhPhan == null || thanhPhan.getMaThanhPhan() <= 0
-                || !Float.isFinite(diemDatDuoc) || diemDatDuoc < 0 || diemDatDuoc > 10) {
+                || diemDatDuoc == null || diemDatDuoc.compareTo(BigDecimal.ZERO) < 0
+                || diemDatDuoc.compareTo(BigDecimal.TEN) > 0 || diemDatDuoc.scale() > 2) {
             return false;
         }
 
