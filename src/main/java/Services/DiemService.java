@@ -102,7 +102,7 @@ public class DiemService {
      * Kết quả nghiệp vụ không hợp lệ được trả về false; lỗi cơ sở dữ liệu được ném lên caller.
      */
     public boolean nhapDiemVaTinhTongKet(GiangVien giangVien, String maSinhVien, String maLop,
-                                         ThanhPhanDanhGia thanhPhan, BigDecimal diemDatDuoc) {
+                                        ThanhPhanDanhGia thanhPhan, BigDecimal diemDatDuoc) {
         kiemTraGiangVien(giangVien);
         if (maSinhVien == null || maSinhVien.isBlank() || maLop == null || maLop.isBlank()
                 || thanhPhan == null || thanhPhan.getMaThanhPhan() <= 0

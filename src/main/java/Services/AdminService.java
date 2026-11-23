@@ -1,8 +1,15 @@
 package Services;
 
-import DAO.*;
-import Model.*;
-
+import DAO.GiangVienDAO;
+import DAO.MonHocDAO;
+import DAO.NganhDAO;
+import DAO.SinhVienDAO;
+import DAO.UsersDAO;
+import Model.Admin;
+import Model.GiangVien;
+import Model.MonHoc;
+import Model.SinhVien;
+import Model.Users;
 import java.sql.SQLException;
 import java.util.List;
 
